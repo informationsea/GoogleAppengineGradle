@@ -1,0 +1,48 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.google.appengine:gradle-appengine-plugin:1.9.17'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'appengine'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.google.appengine:appengine-api-1.0-sdk:1.9.17'
+    providedCompile 'javax.servlet:servlet-api:2.5'
+    compile 'jstl:jstl:1.2'
+    appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.17'
+}
+
+
+appengine {
+    downloadSdk = true
+    httpPort = 8085
+
+    appcfg {
+        email = 'EMAIL@EXMAPLE.COM'
+        oauth2 = true
+    }
+
+    update {
+        useJava7 = true
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2.1'
+}
+
+
